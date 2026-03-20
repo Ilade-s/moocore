@@ -132,7 +132,7 @@ else
 CPPFLAGS += -U_GNU_SOURCE
 endif
 
-SHLIB_CFLAGS = -fvisibility=hidden -DMOOCORE_SHARED_LIB $(OPT_CFLAGS) $(MARCH_FLAGS)
+SHLIB_CFLAGS = -fvisibility=hidden -DMOOCORE_SHARED_LIB $(OPT_CFLAGS) #$(MARCH_FLAGS)
 SHLIB_LDFLAGS = -shared
 
 # Platform-specific linker flags
