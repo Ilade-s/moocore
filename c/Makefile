@@ -154,7 +154,8 @@ ifeq ($(uname_S),Windows)
   SHLIB_LDFLAGS += -fuse-ld=lld
 endif
 
-EXE_CFLAGS += $(SANITIZERS) $(OPT_CFLAGS) $(MARCH_FLAGS) $(WARN_CFLAGS) \
+#$(MARCH_FLAGS)
+EXE_CFLAGS += $(SANITIZERS) $(OPT_CFLAGS) $(WARN_CFLAGS) \ 
 	-DDEBUG=$(DEBUG) -DVERSION='"$(VERSION)"' -DMARCH='"$(gcc-guess-march)"'
 
 
