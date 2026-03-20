@@ -155,7 +155,7 @@ ifeq ($(uname_S),Windows)
 endif
 
 #$(MARCH_FLAGS)
-EXE_CFLAGS += $(SANITIZERS) $(OPT_CFLAGS) $(WARN_CFLAGS) \ 
+EXE_CFLAGS += $(SANITIZERS) $(OPT_CFLAGS) $(WARN_CFLAGS) \
 	-DDEBUG=$(DEBUG) -DVERSION='"$(VERSION)"' -DMARCH='"$(gcc-guess-march)"'
 
 
