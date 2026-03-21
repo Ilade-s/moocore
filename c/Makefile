@@ -135,6 +135,8 @@ endif
 SHLIB_CFLAGS = -fvisibility=hidden -DMOOCORE_SHARED_LIB $(OPT_CFLAGS) #$(MARCH_FLAGS)
 SHLIB_LDFLAGS = -shared
 
+$(info name of Platform '$(uname_S)')
+
 # Platform-specific linker flags
 ifeq ($(uname_S),Linux)
   OS_NAME := Linux
