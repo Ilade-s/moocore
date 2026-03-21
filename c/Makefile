@@ -23,7 +23,7 @@ ifeq ($(OS),Windows_NT)
 else
   uname_S:=$(shell uname -s || echo unknown)
 endif
-$(info Building on '$(uname_S)')
+
 
 # ifeq ($(OS),Windows_NT)
 #   uname_S:=Windows
@@ -137,22 +137,33 @@ SHLIB_LDFLAGS = -shared
 
 # Platform-specific linker flags
 ifeq ($(uname_S),Linux)
+  OS_NAME := Linux
   SHLIB_CFLAGS += -fPIC
   SHLIB_LDFLAGS += $(LDLIBS) -Wl,--no-undefined
   SHLIB_EXT=so
-endif
-ifeq ($(uname_S),Darwin)
+else ifeq ($(uname_S),Darwin)
+  OS_NAME := macOS
   SHLIB_CFLAGS += -fPIC
   SHLIB_LDFLAGS += $(LDLIBS)
   SHLIB_EXT=dylib
-endif
-ifeq ($(uname_S),Windows)
-  # No LTO for Windows.
+else ifneq (,$(findstring CYGWIN,$(UNAME_S)))
+  OS_NAME := Cygwin
+else ifneq (,$(findstring MSYS,$(UNAME_S)))
+  OS_NAME := MSYS
+  OPT_CFLAGS = -DNDEBUG -O2
+  MARCH_FLAGS=
+  SHLIB_EXT=dll
+  SHLIB_LDFLAGS += -fuse-ld=lld
+else ifneq (,$(findstring MINGW,$(UNAME_S)))
+  OS_NAME := MinGW
   OPT_CFLAGS = -DNDEBUG -O2
   MARCH_FLAGS=
   SHLIB_EXT=dll
   SHLIB_LDFLAGS += -fuse-ld=lld
 endif
+
+$(info Building on '$(OS_NAME)')
+
 
 #$(MARCH_FLAGS)
 EXE_CFLAGS += $(SANITIZERS) $(OPT_CFLAGS) $(WARN_CFLAGS) \
