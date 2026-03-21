@@ -148,15 +148,15 @@ else ifeq ($(uname_S),Darwin)
   SHLIB_CFLAGS += -fPIC
   SHLIB_LDFLAGS += $(LDLIBS)
   SHLIB_EXT=dylib
-else ifneq (,$(findstring CYGWIN,$(UNAME_S)))
+else ifneq (,$(findstring CYGWIN,$(uname_S)))
   OS_NAME := Cygwin
-else ifneq (,$(findstring MSYS,$(UNAME_S)))
+else ifneq (,$(findstring MSYS,$(uname_S)))
   OS_NAME := MSYS
   OPT_CFLAGS = -DNDEBUG -O2
   MARCH_FLAGS=
   SHLIB_EXT=dll
   SHLIB_LDFLAGS += -fuse-ld=lld
-else ifneq (,$(findstring MINGW,$(UNAME_S)))
+else ifneq (,$(findstring MINGW,$(uname_S)))
   OS_NAME := MinGW
   OPT_CFLAGS = -DNDEBUG -O2
   MARCH_FLAGS=
